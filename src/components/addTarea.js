@@ -1,58 +1,79 @@
-import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Grid from '@material-ui/core/Grid';
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import React, {useState} from 'react';
+//import Error from './Error';
+
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { withRouter } from 'react-router-dom';
+
+function AgregarLista({history, guardarRecargarListasTareas}) {
+
+    // state
+    const [ name, setNombreLista ] = useState('');
+    const [ error, guardarError ] = useState(false);
 
 
+    const agregarLista = async e => {
+        e.preventDefault();
 
+        if(name ==='') {
+            guardarError(true);
+            return;
+        }
 
-function AddTarea(props){
-    const [open, setOpen] = React.useState(false);
-    const handleShow = () => {
-        console.log(props.agregar);
-        setOpen(props.agregar)
+        guardarError(false);
+
+        // Crear el nueva Lista
+        try {
+            
+            const resultado = await axios.post('http://front-test.tide.mx/api/task_lists', {
+                name
+            });
+            
+
+            if(resultado.status === 201) {
+                Swal.fire(
+                    'Lista creada',
+                    'La lista se creo correctamente',
+                    'success'
+                )
+            }
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'Hubo un error, vuelve a intentarlo'
+            })
+        }
+
+        guardarRecargarListasTareas(true);
+        history.push('/');
+
     }
-    const handleCancelar = () =>{
-        setOpen(false)
-    }
 
-    return(
-        <div>
-            <button onClick={handleShow} >+</button>
-            <Dialog
-          open={open}
-          aria-describedby="alert-dialog-description" 
-        >
-        <DialogTitle> {"Lista de tarea"} </DialogTitle>
-          <DialogContent >
-            <DialogContentText >
-             <Grid item > 
-                <TextField
-                  id="nameList"
-                  required
-                  label="Nombre de lista"
-                  margin="normal"
-                  variant="outlined"
-                  //onChange = {event => setNameEvidence(event.target.value)}
-                />
-              </Grid>
-            </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleCancelar} color="primary">
-                    Cancelar
-                </Button>
-                <Button onClick={handleCancelar} color="primary" >
-                    Agregar
-                </Button>
-            </DialogActions>
-          </Dialog>
+    return (
+        <div className="col-md-8 mx-auto ">
+            <h1 className="text-center">Agregar Nueva Lista</h1>
+
+            {/* {(error) ? <Error mensaje='Todos los campos son obligatorios' /> : null } */}
+
+            <form
+                className="mt-5"
+                onSubmit={agregarLista}
+            >
+                <div className="form-group">
+                    <label>Nombre Lista</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        name="nombre" 
+                        placeholder="Nombre de Lista"
+                        onChange={e => setNombreLista(e.target.value)}
+                    />
+                </div>
+                <input type="submit" className="font-weight-bold text-uppercase mt-5 btn btn-primary btn-block py-3" value="Agregar Lista" />
+            </form>
         </div>
     )
 }
-export default AddTarea;
+export default withRouter(AgregarLista);

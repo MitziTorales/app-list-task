@@ -1,26 +1,21 @@
 import React from 'react';
+import TareaLista from '../components/tareaLista';
 
-import AddTarea from '../components/addTarea';
-import DeleteTarea from '../components/deleteTarea';
+const ListasTarea = ({ listasTareas, guardarRecargarListasTareas }) => {
+    return (
+        <div>
+            <h1 className="text-center">Listas tareas</h1>
+            <ul className="list-group mt-5">
+                {listasTareas.map(listaTarea => (
+                    <TareaLista
+                        key={listaTarea.id}
+                        listaTarea={listaTarea}
+                        guardarRecargarListasTareas={guardarRecargarListasTareas}
+                    />
+                ))}
+            </ul>
+        </div>
+    );
+};
 
-class Listas extends React.Component{
-    buildList(){
-    }
-    render(){
-        return(
-            <div>
-                <h1>Listas de Tares</h1>
-                <div >
-                    <div>
-                    {this.buildList()}
-                    </div>
-                </div>
-                <AddTarea agregar={true} />
-                <DeleteTarea agregar={true}/>
-
-            </div>
-        )
-    }
-
-}
-export default Listas;
+export default ListasTarea;

@@ -7,7 +7,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 
-function AgregarTarea({history, idLista, guardarRecargarTarea}) {
+function AgregarTarea({history, idLista, guardarRecargarListasTareas}) {
     console.log(idLista);
     
     // state
@@ -52,8 +52,8 @@ function AgregarTarea({history, idLista, guardarRecargarTarea}) {
             })
         }
 
-        guardarRecargarTarea(true);
-        history.push(`/tareas/${idLista}`);
+        guardarRecargarListasTareas(true);
+        history.push('/');
 
     }
 

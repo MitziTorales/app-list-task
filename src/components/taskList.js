@@ -4,7 +4,7 @@ import axios from 'axios';
 import Api from '../api';
 import Swal from 'sweetalert2';
 
-function taskList({tarea, guardarRecargarTarea}) {
+function taskList({history, tarea, guardarRecargarListasTareas}) {
 
     const eliminarTarea = id => {
   
@@ -21,13 +21,17 @@ function taskList({tarea, guardarRecargarTarea}) {
                 try {
                     const url = `${Api}/tasks/${id}`;
                     const resultado = await axios.delete(url);
+                    
+                    
                     if(resultado.status === 204){
+
+                    console.log("Resultado ",resultado);
                         Swal.fire(
                             'Eliminado!',
                             'Tarea eliminada',
                             'success'
                         )
-                        guardarRecargarTarea(true)
+                        guardarRecargarListasTareas(true)
                     }
                 } catch (error) {
                     console.log(error);

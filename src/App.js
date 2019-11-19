@@ -35,7 +35,7 @@ function App() {
       if(recargarTarea){
         const consultarApi = async () => {
 				  const resultado = await axios.get(`${Api}/tasks`);
-          
+          console.log('Se llamo tareas');  
 					guardarTarea(resultado.data);
 				};
 				consultarApi();
@@ -93,7 +93,7 @@ function App() {
                 name={tarea[0].name}
                 tarea={tarea[0].tasks}
                 idLista= {idLista}
-                guardarRecargarTarea={guardarRecargarTarea}
+                guardarRecargarListasTareas={guardarRecargarListasTareas}
               />
             )
           }}/>
@@ -104,7 +104,7 @@ function App() {
               return(
               <AddTarea
                 idLista={idLista}
-                guardarRecargarTarea={guardarRecargarTarea}
+                guardarRecargarListasTareas={guardarRecargarListasTareas}
               /> )
             }}/>
             <Route exact path="/tarea/editar/:id" 
@@ -119,7 +119,7 @@ function App() {
                 return (
                   <EditTarea 
                     tarea={tarea[0]}
-                    guardarRecargarTarea={guardarRecargarTarea}
+                    guardarRecargarListasTareas={guardarRecargarListasTareas}
                   />
                 )
             }} />
@@ -135,7 +135,7 @@ function App() {
                 return (
                   <ViewTarea 
                     tarea={tarea[0]}
-                    guardarRecargarTarea={guardarRecargarTarea}
+                    guardarRecargarListasTareas={guardarRecargarListasTareas}
                   />
                 )
             }} />

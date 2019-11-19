@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 function EditList(props) {
 
     // destructuring de props
-    const {history, tarea, guardarRecargarTarea} = props;
+    const {history, tarea, guardarRecargarListasTareas} = props;
     console.log(props);
     
     // generar los refs
@@ -48,12 +48,13 @@ function EditList(props) {
             const resultado = await axios.put(url, editTask);
             console.log(resultado);
             
-            if(resultado.status === 200) {
+            if(resultado.status === 200) {                
                 Swal.fire(
                     'Lista editada',
                     'La lista se edito correctamente',
                     'success'
                 )
+                guardarRecargarListasTareas(true)
             }
         } catch (error) {
             console.log(error);
@@ -65,7 +66,7 @@ function EditList(props) {
         }
 
         // redirigir al usuario, consultar api
-        guardarRecargarTarea(true);
+        //guardarRecargarTarea(true);
         history.push('/');
 
     }

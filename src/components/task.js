@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
-function EditList(props) {
+function Task(props) {
 
     // destructuring de props
     const { tarea } = props;
@@ -72,4 +72,4 @@ function EditList(props) {
         </div>
     )
 }
-export default  withRouter(EditList);
+export default  withRouter(Task);

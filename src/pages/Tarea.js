@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import TareaLista from '../components/taskList';
 
 const Tarea = ({ idLista, name, tarea, guardarRecargarTarea }) => {
-    console.log(tarea);
+    console.log(name);
     
     return (
         <div>

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import TareaLista from '../components/taskList';
-import AddTarea from '../components/addList'
 
 const Tarea = ({ idLista, name, tarea, guardarRecargarTarea }) => {
     console.log(tarea);

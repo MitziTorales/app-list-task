@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Tarea from '../pages/Tarea';
 import axios from 'axios';
 import Api from '../api';
 import Swal from 'sweetalert2';

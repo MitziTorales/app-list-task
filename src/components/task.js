@@ -1,16 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 
 
-import axios from 'axios';
-import Api from '../api';
-import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
-import { userInfo } from 'os';
 
 function EditList(props) {
 
     // destructuring de props
-    const {history, tarea, guardarRecargarTarea} = props;
+    const { tarea } = props;
     console.log(props);
     
     // generar los refs
@@ -37,7 +33,17 @@ function EditList(props) {
                         ref={nameRef}
                         defaultValue={tarea.name}
                     />
-                
+                <div className="form-group">
+                    <label>Creation Date</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        disabled
+                        name="nombre" 
+                        //ref={endDateRef}
+                        defaultValue={tarea.creationDate}
+                    />
+                </div>
                 <div className="form-group">
                     <label>Limit Date</label>
                     <input 

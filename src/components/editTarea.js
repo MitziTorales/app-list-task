@@ -5,7 +5,6 @@ import axios from 'axios';
 import Api from '../api';
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
-import { userInfo } from 'os';
 
 function EditList(props) {
 
@@ -93,11 +92,22 @@ function EditList(props) {
                         defaultValue={tarea.name}
                     />
                 <div className="form-group">
+                    <label>Creation Date</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        disabled
+                        name="nombre" 
+                        defaultValue={tarea.creationDate}
+                    />
+                </div>
+                <div className="form-group">
                     <label>Limit Date</label>
                     <input 
                         type="text" 
                         className="form-control" 
                         name="nombre" 
+                        disabled
                         placeholder="Nombre de la tarea"
                         ref={limitDateRef}
                         defaultValue={tarea.limitDate}

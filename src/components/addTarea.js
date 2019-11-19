@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Calendar from 'react-calendar';
+//import Calendar from 'react-calendar';
 import Error from './error';
 
 import Api from '../api';
@@ -32,7 +32,7 @@ function AgregarTarea({history, idLista, guardarRecargarTarea}) {
         try {
             
             const resultado = await axios.post(`${Api}/tasks`, {
-                name, taskList, limitDate, endDate
+                name, taskList, limitDate
             });
             
 
@@ -83,21 +83,10 @@ function AgregarTarea({history, idLista, guardarRecargarTarea}) {
                         type="text" 
                         className="form-control" 
                         name="nombre" 
-                        placeholder="Nombre de la tarea"
+                        placeholder="Fecha limite"
                         onChange={e => setLimiteDate(e.target.value)}
                     />
-                </div>
-                <div className="form-group">
-                    <label>End Date</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        name="nombre" 
-                        placeholder="Nombre de la tarea"
-                        onChange={e => setEndDate(e.target.value)}
-                    />
-                </div>
-                
+                </div> 
                 <input type="submit" className="font-weight-bold text-uppercase mt-5 btn btn-primary btn-block py-3" value="Agregar Tarea" />
             </form>
         </div>

@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/header';
 import Listas from './pages/Listas';
-import AddListaTarea from './components/addTarea';
-import EditarLista from './components/editTarea';
+import AddListaTarea from './components/addList';
+import EditarLista from './components/editList';
 import Tarea from './pages/Tarea'
 
 import Api from './api';
@@ -82,12 +82,13 @@ function App() {
           render={props => {
             const idLista = parseInt(props.match.params.id);
         
-            const tarea = tareas.filter(tarea => tarea.taskList === idLista);
-            console.log(tarea);
+            const tarea = listasTareas.filter(tarea => tarea.id === idLista);
+            console.log(tarea[0].tasks);
             
             return (
               <Tarea 
-                tarea={tarea[0]}
+                name={tarea[0].name}
+                tarea={tarea[0].tasks}
                 guardarRecargarTarea={guardarListasTareas}
               />
             )

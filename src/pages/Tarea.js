@@ -1,12 +1,14 @@
 import React from 'react';
-import TareaLista from '../components/tareasList';
+import TareaLista from '../components/taskList';
 
-const Tarea = ({ tarea, guardarRecargarTarea }) => {
+const Tarea = ({ name, tarea, guardarRecargarTarea }) => {
+    console.log(tarea);
+    
     return (
         <div>
-            <h1 className="text-center">Tareas</h1>
+            <h1 className="text-center">Tareas {name} </h1>
+            
             <ul className="list-group mt-5">
-                <p>Lista de tarea</p>
                 {tarea.map(tarea => (
                     <TareaLista
                         key={tarea.id}

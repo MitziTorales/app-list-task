@@ -1,5 +1,5 @@
 import React from 'react';
-import TareaLista from '../components/tareaLista';
+import TareaLista from '../components/list';
 
 const ListasTarea = ({ listasTareas, guardarRecargarListasTareas }) => {
     return (

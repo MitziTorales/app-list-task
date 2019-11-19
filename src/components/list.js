@@ -5,7 +5,7 @@ import axios from 'axios';
 import Api from '../api';
 import Swal from 'sweetalert2';
 
-function taskList({tarea, guardarRecargarTarea}) {
+function TareaLista({listaTarea, guardarRecargarListasTareas}) {
 
     const eliminarListaTarea = id => {
   
@@ -20,7 +20,7 @@ function taskList({tarea, guardarRecargarTarea}) {
         }).then( async (result) => {
             if (result.value) {
                 try {
-                    const url = `${Api}/tasks${id}`;
+                    const url = `${Api}/task_lists/${id}`;
                     const resultado = await axios.delete(url);
                     if(resultado.status === 204){
                         Swal.fire(
@@ -28,7 +28,7 @@ function taskList({tarea, guardarRecargarTarea}) {
                             'Lista eliminada',
                             'success'
                         )
-                        guardarRecargarTarea(true)
+                        guardarRecargarListasTareas(true)
                     }
                 } catch (error) {
                     console.log(error);
@@ -45,25 +45,25 @@ function taskList({tarea, guardarRecargarTarea}) {
 
 
     return(
-        <li data-categoria={tarea.name} className="list-group-item d-flex justify-content-between align-items-center">
+        <li data-categoria={listaTarea.name} className="list-group-item d-flex justify-content-between align-items-center">
             <p >
-                {/* <Link to={`/tareas/${tarea.id}`}
-                > */}
-                    {tarea.name}
-                {/* </Link> */}
+                <Link to={`/tareas/${listaTarea.id}`}
+                >
+                    {listaTarea.name}
+                </Link>
                
             </p>
 
             <div>
                 <Link
-                    to={`/tarea/editar/${tarea.id}`}
+                    to={`/lista/editar/${listaTarea.id}`}
                     className="btn btn-success mr-2"
                 >Editar </Link>
 
                 <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={() => eliminarListaTarea(tarea.id)}
+                    onClick={() => eliminarListaTarea(listaTarea.id)}
                 >
                     Eliminar &times;
                 </button>
@@ -73,4 +73,4 @@ function taskList({tarea, guardarRecargarTarea}) {
     )
 }
 
-export default taskList;
+export default TareaLista;

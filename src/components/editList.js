@@ -17,7 +17,7 @@ function EditList(props) {
 
     const [ error, guardarError ] = useState(false);
 
-    const editarProducto = async e => {
+    const editList = async e => {
         e.preventDefault();
 
         // validacion
@@ -36,11 +36,12 @@ function EditList(props) {
         }
 
         // Enviar el Request
-        const url = `${Api}/task_lists${lista.id}`;
+        const url = `${Api}/task_lists/${lista.id}`;
 
         try {
             const resultado = await axios.put(url, name);
-
+            console.log(resultado);
+            
             if(resultado.status === 200) {
                 Swal.fire(
                     'Lista editada',
@@ -72,7 +73,7 @@ function EditList(props) {
 
             <form
                 className="mt-5"
-                onSubmit={editarProducto}
+                onSubmit={editList}
             >
                 <div className="form-group">
                     <label>Nombre lista</label>

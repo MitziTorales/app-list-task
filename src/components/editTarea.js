@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 //import Error from './Error';
 
 import axios from 'axios';
+import Api from '../api';
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 
@@ -35,7 +36,7 @@ function EditList(props) {
         }
 
         // Enviar el Request
-        const url = `http://front-test.tide.mx/api/task_lists/${lista.id}`;
+        const url = `${Api}/task_lists${lista.id}`;
 
         try {
             const resultado = await axios.put(url, name);

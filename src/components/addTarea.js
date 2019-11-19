@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 //import Error from './Error';
 
+import Api from '../api';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
@@ -25,7 +26,7 @@ function AgregarLista({history, guardarRecargarListasTareas}) {
         // Crear el nueva Lista
         try {
             
-            const resultado = await axios.post('http://front-test.tide.mx/api/task_lists', {
+            const resultado = await axios.post(`${Api}/task_lists`, {
                 name
             });
             

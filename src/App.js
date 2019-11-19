@@ -5,7 +5,10 @@ import Header from './components/header';
 import Listas from './pages/Listas';
 import AddListaTarea from './components/addList';
 import EditarLista from './components/editList';
-import Tarea from './pages/Tarea'
+import Tarea from './pages/Tarea';
+import AddTarea from './components/addTarea';
+import EditTarea from './components/editTarea';
+import ViewTarea from './components/task';
 
 import Api from './api';
 import axios from 'axios';
@@ -52,7 +55,8 @@ function App() {
 						exact
 						path="/"
 						render={() => (
-							<Listas listasTareas={listasTareas} guardarRecargarListasTareas={guardarRecargarListasTareas} />
+              <Listas listasTareas={listasTareas} 
+              guardarRecargarListasTareas={guardarRecargarListasTareas} />
 						)}
 					/>
           <Route exact path="/nueva-lista" 
@@ -83,16 +87,58 @@ function App() {
             const idLista = parseInt(props.match.params.id);
         
             const tarea = listasTareas.filter(tarea => tarea.id === idLista);
-            console.log(tarea[0].tasks);
             
             return (
               <Tarea 
                 name={tarea[0].name}
                 tarea={tarea[0].tasks}
-                guardarRecargarTarea={guardarListasTareas}
+                idLista= {idLista}
+                guardarRecargarTarea={guardarRecargarTarea}
               />
             )
           }}/>
+          <Route exact path="/list/:id/nueva-tarea/" 
+            render={props => {
+              const idLista = parseInt(props.match.params.id);
+              console.log(idLista);
+              return(
+              <AddTarea
+                idLista={idLista}
+                guardarRecargarTarea={guardarRecargarTarea}
+              /> )
+            }}/>
+            <Route exact path="/tarea/editar/:id" 
+              render={props => {
+              // tomar el ID del producto
+                const idTarea = parseInt(props.match.params.id);
+                
+              // el producto que se pasa al state
+              const tarea = tareas.filter(tarea => tarea.id === idTarea);
+                //console.log(listasTareas);
+                
+                return (
+                  <EditTarea 
+                    tarea={tarea[0]}
+                    guardarRecargarTarea={guardarRecargarTarea}
+                  />
+                )
+            }} />
+            <Route exact path="/tarea/:id" 
+              render={props => {
+              // tomar el ID del producto
+                const idTarea = parseInt(props.match.params.id);
+                
+              // el producto que se pasa al state
+              const tarea = tareas.filter(tarea => tarea.id === idTarea);
+                //console.log(listasTareas);
+                
+                return (
+                  <ViewTarea 
+                    tarea={tarea[0]}
+                    guardarRecargarTarea={guardarRecargarTarea}
+                  />
+                )
+            }} />
 				</Switch>
 			</main>
 			<p className="mt-4 p2 text-center">Mitzi Torales Castillo</p>

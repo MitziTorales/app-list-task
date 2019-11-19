@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-//import Error from './Error';
+import Error from './error';
 
 import Api from '../api';
 import axios from 'axios';
@@ -56,7 +56,7 @@ function AgregarLista({history, guardarRecargarListasTareas}) {
         <div className="col-md-8 mx-auto ">
             <h1 className="text-center">Agregar Nueva Lista</h1>
 
-            {/* {(error) ? <Error mensaje='Todos los campos son obligatorios' /> : null } */}
+            {(error) ? <Error mensaje='Todos los campos son obligatorios' /> : null }
 
             <form
                 className="mt-5"

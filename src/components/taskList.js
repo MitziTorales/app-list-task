@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 function taskList({tarea, guardarRecargarTarea}) {
 
-    const eliminarListaTarea = id => {
+    const eliminarTarea = id => {
   
         Swal.fire({
             title: '¿Estas Seguro de eliminar la tarea?',
@@ -25,7 +25,7 @@ function taskList({tarea, guardarRecargarTarea}) {
                     if(resultado.status === 204){
                         Swal.fire(
                             'Eliminado!',
-                            'Lista eliminada',
+                            'Tarea eliminada',
                             'success'
                         )
                         guardarRecargarTarea(true)
@@ -46,10 +46,11 @@ function taskList({tarea, guardarRecargarTarea}) {
 
     return(
         <li data-categoria={tarea.name} className="list-group-item d-flex justify-content-between align-items-center">
-            <p >
+            
+            <Link to={`/tarea/${tarea.id}`}>
                 {tarea.name}
-               
-            </p>
+            
+            </Link>
 
             <div>
                 <Link
@@ -60,7 +61,7 @@ function taskList({tarea, guardarRecargarTarea}) {
                 <button
                     type="button"
                     className="btn btn-danger"
-                    onClick={() => eliminarListaTarea(tarea.id)}
+                    onClick={() => eliminarTarea(tarea.id)}
                 >
                     Eliminar &times;
                 </button>

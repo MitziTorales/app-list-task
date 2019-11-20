@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 
 function AgregarLista({history, guardarRecargarListasTareas}) {
 
-    // state
     const [ name, setNombreLista ] = useState('');
     const [ error, guardarError ] = useState(false);
 
@@ -23,7 +22,6 @@ function AgregarLista({history, guardarRecargarListasTareas}) {
 
         guardarError(false);
 
-        // Crear el nueva Lista
         try {
             
             const resultado = await axios.post(`${Api}/task_lists`, {

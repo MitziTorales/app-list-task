@@ -67,12 +67,9 @@ function App() {
             )}/>
          <Route exact path="/lista/editar/:id" 
             render={props => {
-            // tomar el ID del producto
               const idLista = parseInt(props.match.params.id);
               
-            // el producto que se pasa al state
             const lista = listasTareas.filter(lista => lista.id === idLista);
-              //console.log(listasTareas);
               
               return (
                 <EditarLista 
@@ -94,6 +91,7 @@ function App() {
                 tarea={tarea[0].tasks}
                 idLista= {idLista}
                 guardarRecargarListasTareas={guardarRecargarListasTareas}
+                guardarRecargarTarea={guardarRecargarTarea}
               />
             )
           }}/>
@@ -105,32 +103,28 @@ function App() {
               <AddTarea
                 idLista={idLista}
                 guardarRecargarListasTareas={guardarRecargarListasTareas}
+                guardarRecargarTarea={guardarRecargarTarea}
               /> )
             }}/>
             <Route exact path="/tarea/editar/:id" 
               render={props => {
-              // tomar el ID del producto
                 const idTarea = parseInt(props.match.params.id);
                 
-              // el producto que se pasa al state
               const tarea = tareas.filter(tarea => tarea.id === idTarea);
-                //console.log(listasTareas);
                 
                 return (
                   <EditTarea 
                     tarea={tarea[0]}
                     guardarRecargarListasTareas={guardarRecargarListasTareas}
+                    guardarRecargarTarea={guardarRecargarTarea}
                   />
                 )
             }} />
             <Route exact path="/tarea/:id" 
               render={props => {
-              // tomar el ID del producto
                 const idTarea = parseInt(props.match.params.id);
                 
-              // el producto que se pasa al state
               const tarea = tareas.filter(tarea => tarea.id === idTarea);
-                //console.log(listasTareas);
                 
                 return (
                   <ViewTarea 

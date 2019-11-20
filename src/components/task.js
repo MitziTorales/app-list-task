@@ -5,11 +5,8 @@ import { withRouter } from 'react-router-dom';
 
 function Task(props) {
 
-    // destructuring de props
     const { tarea } = props;
-    console.log(props);
     
-    // generar los refs
     const nameRef = useRef('');
     const limitDateRef = useRef('');
     const endDateRef = useRef('');

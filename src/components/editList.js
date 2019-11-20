@@ -8,11 +8,9 @@ import { withRouter } from 'react-router-dom';
 
 function EditList(props) {
 
-    // destructuring de props
     const {history, lista, guardarRecargarListasTareas} = props;
-    console.log(props);
+
     
-    // generar los refs
     const nameRef = useRef('');
 
     const [ error, guardarError ] = useState(false);
@@ -20,7 +18,6 @@ function EditList(props) {
     const editList = async e => {
         e.preventDefault();
 
-        // validacion
         const newNameList = nameRef.current.value;
 
         if(newNameList === '' ) {
@@ -30,12 +27,10 @@ function EditList(props) {
 
         guardarError(false);
         
-        // Obtener los valores del formulario
         const name = {
             name : newNameList
         }
 
-        // Enviar el Request
         const url = `${Api}/task_lists/${lista.id}`;
 
         try {
@@ -58,7 +53,6 @@ function EditList(props) {
             })
         }
 
-        // redirigir al usuario, consultar api
         guardarRecargarListasTareas(true);
         history.push('/');
 

@@ -7,13 +7,12 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 
-function AgregarTarea({history, idLista, guardarRecargarListasTareas}) {
+function AgregarTarea({history, idLista, guardarRecargarListasTareas, guardarRecargarTarea}) {
     console.log(idLista);
     
     // state
-    const [ name, setNombreTarea ] = useState('');
+    const [ name, setNombre ] = useState('');
     const [ limitDate, setLimiteDate ] = useState('');
-    const [ endDate, setEndDate ] = useState('');
     const [ taskList, setTaskList ] = useState(idLista);
     const [ error, guardarError ] = useState(false);
 
@@ -21,14 +20,13 @@ function AgregarTarea({history, idLista, guardarRecargarListasTareas}) {
     const agregarLista = async e => {
         e.preventDefault();
 
-        if(name ==='') {
+        if(name.trim() === '') {
             guardarError(true);
             return;
         }
 
         guardarError(false);
 
-        // Crear el nueva Lista
         try {
             
             const resultado = await axios.post(`${Api}/tasks`, {
@@ -42,6 +40,8 @@ function AgregarTarea({history, idLista, guardarRecargarListasTareas}) {
                     'La lista se creo correctamente',
                     'success'
                 )
+                guardarRecargarListasTareas(true)
+                guardarRecargarTarea(true)
             }
         } catch (error) {
             console.log(error);
@@ -51,8 +51,6 @@ function AgregarTarea({history, idLista, guardarRecargarListasTareas}) {
                 text: 'Hubo un error, vuelve a intentarlo'
             })
         }
-
-        guardarRecargarListasTareas(true);
         history.push('/');
 
     }
@@ -74,16 +72,18 @@ function AgregarTarea({history, idLista, guardarRecargarListasTareas}) {
                         className="form-control" 
                         name="nombre" 
                         placeholder="Nombre de la tarea"
-                        onChange={e => setNombreTarea(e.target.value)}
+                        value={name}
+                        onChange={e => setNombre(e.target.value)}
                     />
                 </div>
                 <div className="form-group">
                     <label>Limit Date</label>
                     <input 
-                        type="text" 
+                        type="date" 
                         className="form-control" 
                         name="nombre" 
                         placeholder="Fecha limite"
+                        value={limitDate}
                         onChange={e => setLimiteDate(e.target.value)}
                     />
                 </div> 

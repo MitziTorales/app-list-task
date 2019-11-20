@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import TareaLista from '../components/taskList';
 
-const Tarea = ({ idLista, name, tarea, guardarRecargarTarea }) => {
+const Tarea = ({ idLista, name, tarea, guardarRecargarListasTareas }) => {
     console.log(name);
     
     return (
@@ -14,7 +14,7 @@ const Tarea = ({ idLista, name, tarea, guardarRecargarTarea }) => {
                     <TareaLista
                         key={tarea.id}
                         tarea={tarea}
-                        guardarRecargarTarea={guardarRecargarTarea}
+                        guardarRecargarListasTareas={guardarRecargarListasTareas}
                     />
                 ))}
             </ul>

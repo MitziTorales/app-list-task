@@ -2,17 +2,15 @@ import React, { useState, useRef } from 'react';
 import Error from './error';
 
 import axios from 'axios';
+import moment from 'moment'
 import Api from '../api';
 import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 
 function EditList(props) {
 
-    // destructuring de props
-    const {history, tarea, guardarRecargarListasTareas} = props;
-    console.log(props);
+    const {history, tarea, guardarRecargarListasTareas, guardarRecargarTarea} = props;
     
-    // generar los refs
     const nameRef = useRef('');
     const limitDateRef = useRef('');
     const endDateRef = useRef('');
@@ -22,32 +20,26 @@ function EditList(props) {
     const editarTarea = async e => {
         e.preventDefault();
 
-        // validacion
         const newNameList = nameRef.current.value,
               newLimitDate = limitDateRef.current.value,
               newEndDate = endDateRef.current.value;
 
-        if(newNameList === '' ) {
+        if(newNameList.trim() === '' ) {
             guardarError(true);
             return;
         }
 
         guardarError(false);
         
-        // Obtener los valores del formulario
         const editTask = {
             name : newNameList,
             limitDate: newLimitDate,
             endDate: newEndDate
         }
 
-        // Enviar el Request
         const url = `${Api}/tasks/${tarea.id}`;
-
         try {
             const resultado = await axios.put(url, editTask);
-            console.log(resultado);
-            
             if(resultado.status === 200) {                
                 Swal.fire(
                     'Lista editada',
@@ -55,6 +47,7 @@ function EditList(props) {
                     'success'
                 )
                 guardarRecargarListasTareas(true)
+                guardarRecargarTarea(true)
             }
         } catch (error) {
             console.log(error);
@@ -65,8 +58,6 @@ function EditList(props) {
             })
         }
 
-        // redirigir al usuario, consultar api
-        //guardarRecargarTarea(true);
         history.push('/');
 
     }
@@ -117,11 +108,11 @@ function EditList(props) {
                 <div className="form-group">
                     <label>End Date</label>
                     <input 
-                        type="text" 
-                        className="form-control" 
-                        name="nombre" 
+                        type="date" 
+                        className="form-control"
+                        name="date" 
                         ref={endDateRef}
-                        defaultValue={tarea.endDate}
+                        defaultValue={moment(tarea.endDate).format("YYYY-MM-DD")} 
                     />
                 </div>
                 </div>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Api from '../api';
 import Swal from 'sweetalert2';
 
-function taskList({history, tarea, guardarRecargarListasTareas}) {
+function taskList({ tarea, guardarRecargarListasTareas}) {
 
     const eliminarTarea = id => {
   

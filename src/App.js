@@ -35,7 +35,6 @@ function App() {
       if(recargarTarea){
         const consultarApi = async () => {
 				  const resultado = await axios.get(`${Api}/tasks`);
-          console.log('Se llamo tareas');  
 					guardarTarea(resultado.data);
 				};
 				consultarApi();
@@ -98,7 +97,6 @@ function App() {
           <Route exact path="/list/:id/nueva-tarea/" 
             render={props => {
               const idLista = parseInt(props.match.params.id);
-              console.log(idLista);
               return(
               <AddTarea
                 idLista={idLista}

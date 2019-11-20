@@ -8,9 +8,7 @@ import Swal from 'sweetalert2';
 import { withRouter } from 'react-router-dom';
 
 function AgregarTarea({history, idLista, guardarRecargarListasTareas, guardarRecargarTarea}) {
-    console.log(idLista);
-    
-    // state
+
     const [ name, setNombre ] = useState('');
     const [ limitDate, setLimiteDate ] = useState('');
     const [ taskList, setTaskList ] = useState(idLista);

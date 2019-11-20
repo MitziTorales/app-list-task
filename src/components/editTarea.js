@@ -20,6 +20,7 @@ function EditList(props) {
     const editarTarea = async e => {
         e.preventDefault();
 
+        
         const newNameList = nameRef.current.value,
               newLimitDate = limitDateRef.current.value,
               newEndDate = endDateRef.current.value;
@@ -28,14 +29,26 @@ function EditList(props) {
             guardarError(true);
             return;
         }
-
-        guardarError(false);
         
-        const editTask = {
-            name : newNameList,
-            limitDate: newLimitDate,
-            endDate: newEndDate
-        }
+        guardarError(false);
+
+        let editTask = {}
+        
+         if(newEndDate){
+            editTask = {
+                name : newNameList,
+                limitDate: newLimitDate,
+                endDate: newEndDate
+            }
+         }else {
+            
+            editTask = {
+                name : newNameList,
+                limitDate: newLimitDate
+            }
+         }
+        
+        
 
         const url = `${Api}/tasks/${tarea.id}`;
         try {

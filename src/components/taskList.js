@@ -25,7 +25,6 @@ function taskList({ tarea, guardarRecargarListasTareas}) {
                     
                     if(resultado.status === 204){
 
-                    console.log("Resultado ",resultado);
                         Swal.fire(
                             'Eliminado!',
                             'Tarea eliminada',

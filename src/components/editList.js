@@ -35,7 +35,6 @@ function EditList(props) {
 
         try {
             const resultado = await axios.put(url, name);
-            console.log(resultado);
             
             if(resultado.status === 200) {
                 Swal.fire(

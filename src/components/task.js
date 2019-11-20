@@ -37,7 +37,6 @@ function Task(props) {
                         className="form-control" 
                         disabled
                         name="nombre" 
-                        //ref={endDateRef}
                         defaultValue={tarea.creationDate}
                     />
                 </div>
